@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbFeedsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FeedsProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FeedsType" Type="int" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="FeedType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProviderMainPage">
+          <Key>
+            <PropertyRef Name="FeedsProviderID" />
+            <PropertyRef Name="WeekDay" />
+          </Key>
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="FeedsProviderID" Type="int" Nullable="false" />
+          <Property Name="WeekDay" Type="int" Nullable="false" />
+          <Property Name="MainPageParserType" Type="int" />
+        </EntityType>
+        <Association Name="FK_FeedsProvider_FeedType">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
+          <End Role="FeedsProvider" Type="Self.FeedsProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedsProvider">
+              <PropertyRef Name="FeedsType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderMainPage_ToFeedsProvider">
+          <End Role="FeedsProvider" Type="Self.FeedsProvider" Multiplicity="1" />
+          <End Role="ProviderMainPage" Type="Self.ProviderMainPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedsProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderMainPage">
+              <PropertyRef Name="FeedsProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbFeedsModelStoreContainer">
+          <EntitySet Name="FeedsProvider" EntityType="Self.FeedsProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedType" EntityType="Self.FeedType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderMainPage" EntityType="Self.ProviderMainPage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FeedsProvider_FeedType" Association="Self.FK_FeedsProvider_FeedType">
+            <End Role="FeedType" EntitySet="FeedType" />
+            <End Role="FeedsProvider" EntitySet="FeedsProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderMainPage_ToFeedsProvider" Association="Self.FK_ProviderMainPage_ToFeedsProvider">
+            <End Role="FeedsProvider" EntitySet="FeedsProvider" />
+            <End Role="ProviderMainPage" EntitySet="ProviderMainPage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbFeedsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FeedsProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FeedsType" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FeedType" Relationship="Self.FK_FeedsProvider_FeedType" FromRole="FeedsProvider" ToRole="FeedType" />
+          <NavigationProperty Name="ProviderMainPages" Relationship="dbFeedsModel.FK_ProviderMainPage_ToFeedsProvider" FromRole="FeedsProvider" ToRole="ProviderMainPage" />
+        </EntityType>
+        <EntityType Name="FeedType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FeedsProviders" Relationship="Self.FK_FeedsProvider_FeedType" FromRole="FeedType" ToRole="FeedsProvider" />
+        </EntityType>
+        <Association Name="FK_FeedsProvider_FeedType">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
+          <End Role="FeedsProvider" Type="Self.FeedsProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedsProvider">
+              <PropertyRef Name="FeedsType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbFeedsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeedsProviders" EntityType="Self.FeedsProvider" />
+          <EntitySet Name="FeedTypes" EntityType="Self.FeedType" />
+          <AssociationSet Name="FK_FeedsProvider_FeedType" Association="Self.FK_FeedsProvider_FeedType">
+            <End Role="FeedType" EntitySet="FeedTypes" />
+            <End Role="FeedsProvider" EntitySet="FeedsProviders" />
+          </AssociationSet>
+          <EntitySet Name="ProviderMainPages" EntityType="dbFeedsModel.ProviderMainPage" />
+          <AssociationSet Name="FK_ProviderMainPage_ToFeedsProvider" Association="dbFeedsModel.FK_ProviderMainPage_ToFeedsProvider">
+            <End Role="FeedsProvider" EntitySet="FeedsProviders" />
+            <End Role="ProviderMainPage" EntitySet="ProviderMainPages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ProviderMainPage">
+          <Key>
+            <PropertyRef Name="FeedsProviderID" />
+            <PropertyRef Name="WeekDay" />
+          </Key>
+          <Property Name="ImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FeedsProviderID" Type="Int32" Nullable="false" />
+          <Property Name="WeekDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FeedsProvider" Relationship="dbFeedsModel.FK_ProviderMainPage_ToFeedsProvider" FromRole="ProviderMainPage" ToRole="FeedsProvider" />
+          <Property Name="MainPageParserType" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_ProviderMainPage_ToFeedsProvider">
+          <End Type="dbFeedsModel.FeedsProvider" Role="FeedsProvider" Multiplicity="1" />
+          <End Type="dbFeedsModel.ProviderMainPage" Role="ProviderMainPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedsProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderMainPage">
+              <PropertyRef Name="FeedsProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbFeedsModelStoreContainer" CdmEntityContainer="dbFeedsEntities">
+          <EntitySetMapping Name="FeedsProviders">
+            <EntityTypeMapping TypeName="dbFeedsModel.FeedsProvider">
+              <MappingFragment StoreEntitySet="FeedsProvider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FeedsType" ColumnName="FeedsType" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedTypes">
+            <EntityTypeMapping TypeName="dbFeedsModel.FeedType">
+              <MappingFragment StoreEntitySet="FeedType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderMainPages">
+            <EntityTypeMapping TypeName="dbFeedsModel.ProviderMainPage">
+              <MappingFragment StoreEntitySet="ProviderMainPage">
+                <ScalarProperty Name="MainPageParserType" ColumnName="MainPageParserType" />
+                <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
+                <ScalarProperty Name="FeedsProviderID" ColumnName="FeedsProviderID" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,29 @@
+﻿@model WebFeedsUI.Models.FeedsReader
+
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="container" style="margin-top:50px; margin-bottom:50px">
+    <div class="row featurette">
+        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+        {
+            <div class="container">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" src="@Model.ImageUrl" alt="Generic placeholder image">
+            </div>
+        }
+        <div class="col-md-7">
+            <h2 class="featurette-heading">@Model.Name</h2>
+            <br />
+            <ul style="overflow: auto">
+                @foreach (var item in @Model.Feeds)
+                {
+                    <li>
+                        <h4><a href="@item.Link">@item.Title</a></h4>
+                        <p>@item.Description</p>
+                        @*<p>@item.Link</p>*@
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

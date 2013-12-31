@@ -1,0 +1,95 @@
+﻿@model List<WebFeedsUI.Models.FeedsReader>
+
+@{
+    ViewBag.Title = "Todos";
+    bool _even = true;
+}
+
+<div class="container">
+    <!-- START THE FEATURETTES -->
+    @foreach (var feedsReader in @Model)
+    {
+        <hr class="featurette-divider">
+
+        if (_even == true)
+        {
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">@feedsReader.Name</h2>
+                    <br />
+                    <ul style="height: 500px; overflow: auto">
+                        @foreach (var item in @feedsReader.Feeds)
+                        {
+                            <li>
+                                <h4><a href="@item.Link">@item.Title</a></h4>
+                                <p>@item.Description</p>
+                                @*<p>@item.Link</p>*@
+                            </li>
+                        }
+                    </ul>
+                </div>
+                @if (!string.IsNullOrWhiteSpace(feedsReader.ImageUrl))
+                {
+                    <div class="col-md-5">
+                        <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" src="@feedsReader.ImageUrl" alt="Generic placeholder image">
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+
+            <div class="row featurette">
+                @if (!string.IsNullOrWhiteSpace(feedsReader.ImageUrl))
+                {
+                    <div class="col-md-5">
+                        @*<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" src="http://imagens9.publico.pt/imagens.aspx/2013/12/26/Publico/Publico-20131226.jpg?tp=ARQUIVO" alt="Generic placeholder image">*@
+                        <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" src="@feedsReader.ImageUrl" alt="Generic placeholder image">
+                    </div>
+                }
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">@feedsReader.Name</h2>
+                    <br />
+                    <ul style="height: 500px; overflow: auto">
+                        @foreach (var item in @feedsReader.Feeds)
+                        {
+                            <li>
+                                <h4><a href="@item.Link">@item.Title</a></h4>
+                                <p>@item.Description</p>
+                                @*<p>@item.Link</p>*@
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+        _even = !_even;
+    }
+</div>
+      @*<hr class="featurette-divider">
+
+      @*<div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">*@
+
+      <!-- /END THE FEATURETTES -->

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFeedsUI", "WebFeedsUI\WebFeedsUI.csproj", "{9432CC52-2043-435C-8D8E-DCA80E260FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFeedsDomain", "WebFeedsDomain\WebFeedsDomain.csproj", "{65B7459C-0D70-4BB7-96A9-C571F40678BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFeedsUInterface", "WebFeedsUInterface\WebFeedsUInterface.csproj", "{94B77F54-B6EB-44C0-A28E-AB02974D593B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9432CC52-2043-435C-8D8E-DCA80E260FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9432CC52-2043-435C-8D8E-DCA80E260FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9432CC52-2043-435C-8D8E-DCA80E260FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9432CC52-2043-435C-8D8E-DCA80E260FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B7459C-0D70-4BB7-96A9-C571F40678BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B7459C-0D70-4BB7-96A9-C571F40678BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B7459C-0D70-4BB7-96A9-C571F40678BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B7459C-0D70-4BB7-96A9-C571F40678BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B77F54-B6EB-44C0-A28E-AB02974D593B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B77F54-B6EB-44C0-A28E-AB02974D593B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B77F54-B6EB-44C0-A28E-AB02974D593B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B77F54-B6EB-44C0-A28E-AB02974D593B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
